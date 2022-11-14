@@ -2,6 +2,7 @@ package com.example.androidstudio2dgamedevelopment;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -11,11 +12,15 @@ import android.util.Log;
 public class MainActivity extends Activity {
 
     private Game game;
-
+    private MediaPlayer mPlayer; // 배경음악
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("MainActivity.java", "onCreate()");
         super.onCreate(savedInstanceState);
+
+        mPlayer = MediaPlayer.create(this,R.raw.findmoris);
+        mPlayer.setLooping(true);
+        mPlayer.start();
 
         // Set content view to game, so that objects in the Game class can be rendered to the screen
         game = new Game(this);

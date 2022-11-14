@@ -1,6 +1,8 @@
 package com.example.androidstudio2dgamedevelopment;
 
 import android.graphics.Rect;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.view.Display;
 
 import com.example.androidstudio2dgamedevelopment.gameobject.GameObject;
@@ -24,7 +26,6 @@ public class GameDisplay {
         DISPLAY_RECT = new Rect(0, 0, widthPixels, heightPixels);
 
         this.centerObject = centerObject;
-
         displayCenterX = widthPixels/2.0;
         displayCenterY = heightPixels/2.0;
 
