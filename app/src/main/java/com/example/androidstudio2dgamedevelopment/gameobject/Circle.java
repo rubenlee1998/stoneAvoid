@@ -2,6 +2,7 @@ package com.example.androidstudio2dgamedevelopment.gameobject;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.androidstudio2dgamedevelopment.GameDisplay;

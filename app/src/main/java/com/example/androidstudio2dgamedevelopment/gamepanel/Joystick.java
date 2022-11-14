@@ -62,13 +62,17 @@ public class Joystick {
     }
 
     public void update() {
-        updateInnerCirclePosition();
-    }
-
-    private void updateInnerCirclePosition() {
+        if(outerCircleCenterPositionX <= 400 - actuatorX / 6 * outerCircleRadius && outerCircleCenterPositionX >= 200 - actuatorX / 6 * outerCircleRadius) {
+            outerCircleCenterPositionX = (int) (outerCircleCenterPositionX + actuatorX / 5 * outerCircleRadius);
+        }
+        if(outerCircleCenterPositionY > 650 - actuatorY / 6 * outerCircleRadius && outerCircleCenterPositionY < 800 - actuatorY / 6 * outerCircleRadius){
+            outerCircleCenterPositionY = (int) (outerCircleCenterPositionY + actuatorY / 5 * outerCircleRadius);
+        }
         innerCircleCenterPositionX = (int) (outerCircleCenterPositionX + actuatorX*outerCircleRadius);
         innerCircleCenterPositionY = (int) (outerCircleCenterPositionY + actuatorY*outerCircleRadius);
     }
+
+
 
     public void setActuator(double touchPositionX, double touchPositionY) {
         double deltaX = touchPositionX - outerCircleCenterPositionX;
@@ -111,5 +115,7 @@ public class Joystick {
     public void resetActuator() {
         actuatorX = 0;
         actuatorY = 0;
+        outerCircleCenterPositionX = 275;
+        outerCircleCenterPositionY = 700;
     }
 }

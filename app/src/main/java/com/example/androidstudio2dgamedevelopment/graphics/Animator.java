@@ -8,9 +8,7 @@ import com.example.androidstudio2dgamedevelopment.gameobject.PlayerState;
 
 public class Animator {
     private Sprite[] playerSpriteArray;
-    private int idxNotMovingFrame = 0;
     private int idxMovingFrame = 1;
-    private int updatesBeforeNextMoveFrame;
     private static final int MAX_UPDATES_BEFORE_NEXT_MOVE_FRAME = 5;
 
     public Animator(Sprite[] playerSpriteArray) {
@@ -19,46 +17,25 @@ public class Animator {
 
 
     public void draw(Canvas canvas, GameDisplay gameDisplay, Player player) {
-//        switch (player.getPlayerState().getState()) {
-//            case NOT_MOVING:
-//        if(player.getPlayerState().getState() == PlayerState.State.NOT_MOVING){
-//                drawFrame(canvas, gameDisplay, player, playerSpriteArray[1]);}
-//                break;
-//            case UP_MOVING:
+
         if(player.getPlayerState().getState() == PlayerState.State.UP_MOVING){
                 drawFrame(canvas, gameDisplay, player, playerSpriteArray[0]);}
-//                break;
-//            case DOWN_MOVING:
         else if(player.getPlayerState().getState() == PlayerState.State.DOWN_MOVING){
                 drawFrame(canvas, gameDisplay, player, playerSpriteArray[2]);}
         else if(player.getPlayerState().getState() == PlayerState.State.RIGHT_MOVING){
             drawFrame(canvas, gameDisplay, player, playerSpriteArray[1]);}
         else if(player.getPlayerState().getState() == PlayerState.State.LEFT_MOVING){
             drawFrame(canvas, gameDisplay, player, playerSpriteArray[3]);}
-//                break;
-//            case STARED_MOVING:
-//                updatesBeforeNextMoveFrame = MAX_UPDATES_BEFORE_NEXT_MOVE_FRAME;
-//                drawFrame(canvas, gameDisplay, player, playerSpriteArray[idxMovingFrame]);
-//                break;
-//            case IS_MOVING:
-//                updatesBeforeNextMoveFrame--;
-//                if(updatesBeforeNextMoveFrame == 0) {
-//                    updatesBeforeNextMoveFrame = MAX_UPDATES_BEFORE_NEXT_MOVE_FRAME;
-//                    toggleIdxMovingFrame();
-//                }
-//                drawFrame(canvas, gameDisplay, player, playerSpriteArray[idxMovingFrame]);
-//                break;
-//            default:
-//                break;
-//        }
+        else if(player.getPlayerState().getState() == PlayerState.State.UP_RIGHT_MOVING){
+            drawFrame(canvas, gameDisplay, player, playerSpriteArray[5]);}
+        else if(player.getPlayerState().getState() == PlayerState.State.DOWN_RIGHT_MOVING){
+            drawFrame(canvas, gameDisplay, player, playerSpriteArray[6]);}
+        else if(player.getPlayerState().getState() == PlayerState.State.DOWN_LEFT_MOVING){
+            drawFrame(canvas, gameDisplay, player, playerSpriteArray[7]);}
+        else if(player.getPlayerState().getState() == PlayerState.State.UP_LEFT_MOVING){
+            drawFrame(canvas, gameDisplay, player, playerSpriteArray[4]);}
     }
 
-    private void toggleIdxMovingFrame() {
-        if(idxMovingFrame == 1)
-            idxMovingFrame = 2;
-        else
-            idxMovingFrame = 1;
-    }
 
     public void drawFrame(Canvas canvas, GameDisplay gameDisplay, Player player, Sprite sprite) {
         sprite.draw(

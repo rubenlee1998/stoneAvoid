@@ -19,11 +19,15 @@ public class SpriteSheet {
     }
 
     public Sprite[] getPlayerSpriteArray() {
-        Sprite[] spriteArray = new Sprite[4];
+        Sprite[] spriteArray = new Sprite[8];
         spriteArray[0] = new Sprite(this, new Rect(0*64, 0, 1*64, 64));
         spriteArray[1] = new Sprite(this, new Rect(1*64, 0, 2*64, 64));
         spriteArray[2] = new Sprite(this, new Rect(2*64, 0, 3*64, 64));
         spriteArray[3] = new Sprite(this, new Rect(3*64, 0, 4*64, 64));
+        spriteArray[4] = new Sprite(this, new Rect(0*64, 128, 1*64, 192)); // 북서쪽
+        spriteArray[5] = new Sprite(this, new Rect(1*64, 128, 2*64, 192)); // 북동쪽
+        spriteArray[6] = new Sprite(this, new Rect(2*64, 128, 3*64, 192)); // 남동쪽
+        spriteArray[7] = new Sprite(this, new Rect(3*64, 128, 4*64, 192)); // 남서쪽
         return spriteArray;
     }
 
