@@ -187,7 +187,9 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Update states of all spells
         while (numberOfSpellsToCast > 0) {
-            spellList.add(new Spell(getContext(), player));
+            SpriteSheet spriteSheet = new SpriteSheet(getContext());
+            Animator animator = new Animator(spriteSheet.getSpellSpriteArray());
+            spellList.add(new Spell(getContext(), player,animator));
             numberOfSpellsToCast --;
         }
         for (Spell spell : spellList) {

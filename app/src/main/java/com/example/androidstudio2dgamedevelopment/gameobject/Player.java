@@ -57,7 +57,7 @@ public class Player extends Circle {
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        animator.draw(canvas, gameDisplay, this,null);
+        animator.draw(canvas, gameDisplay, this,null,null);
 
         healthBar.draw(canvas, gameDisplay);
 

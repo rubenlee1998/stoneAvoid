@@ -92,7 +92,7 @@ public class Enemy extends Circle {
         positionY += velocityY;
     }
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        animator.draw(canvas, gameDisplay, this.player,this);
+        animator.draw(canvas, gameDisplay, this.player,this,null);
     }
 }
 

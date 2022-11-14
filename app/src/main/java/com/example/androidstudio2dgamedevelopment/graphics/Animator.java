@@ -6,11 +6,13 @@ import com.example.androidstudio2dgamedevelopment.GameDisplay;
 import com.example.androidstudio2dgamedevelopment.gameobject.Enemy;
 import com.example.androidstudio2dgamedevelopment.gameobject.Player;
 import com.example.androidstudio2dgamedevelopment.gameobject.PlayerState;
+import com.example.androidstudio2dgamedevelopment.gameobject.Spell;
 
 public class Animator {
     private Sprite[] playerSpriteArray;
     private int idxMovingFrame = 1;
     public int gimoring = 0;
+    public int gimoring2 = 0;
     public int cnt = 0;
     public PlayerState.State pre;
     public Animator(Sprite[] playerSpriteArray) {
@@ -18,9 +20,37 @@ public class Animator {
     }
 
 
-    public void draw(Canvas canvas, GameDisplay gameDisplay, Player player, Enemy enemy) {
-
-        if (enemy != null) {
+    public void draw(Canvas canvas, GameDisplay gameDisplay, Player player, Enemy enemy,Spell spell) {
+        if(spell != null){
+            if (gimoring2 == 0) {
+                gimoring2 = 1;
+            } else if(gimoring2 == 1){
+                gimoring2 = 2;
+            }
+            else if(gimoring2 == 2){
+                gimoring2 =3;
+            }
+            else if(gimoring2 == 3){
+                gimoring2 =4;
+            }
+            else if(gimoring2 == 4){
+                gimoring2 =5;
+            }
+            else if(gimoring2 == 5){
+                gimoring2 =6;
+            }
+            else if(gimoring2 == 6){
+                gimoring2 =7;
+            }
+            else if(gimoring2 == 7){
+                gimoring2 =8;
+            }
+            else if(gimoring2 == 8){
+                gimoring2 =0;
+            }
+            drawSpellFrame(canvas, gameDisplay,playerSpriteArray[gimoring2],spell);
+        }
+        else if (enemy != null) {
             if (gimoring == 0) {
                 gimoring = 1;
             } else if(gimoring == 1){
@@ -46,7 +76,7 @@ public class Animator {
             }
             drawFrame(canvas, gameDisplay, enemy.player, playerSpriteArray[gimoring],enemy);
 
-        } else {
+        } else if(player != null){
 
             if (player.getPlayerState().getState() == PlayerState.State.UP_MOVING) {
                 pre = player.getPlayerState().getState();
@@ -98,6 +128,7 @@ public class Animator {
 
 
     public void drawFrame(Canvas canvas, GameDisplay gameDisplay, Player player, Sprite sprite,Enemy enemy) {
+
         if(enemy == null) {
             sprite.draw(
                     canvas,
@@ -112,5 +143,12 @@ public class Animator {
                     (int) gameDisplay.gameToDisplayCoordinatesY(enemy.getPositionY()) - sprite.getHeight() / 2
             );
         }
+    }
+    public void drawSpellFrame(Canvas canvas, GameDisplay gameDisplay, Sprite sprite,  Spell spell) {
+        sprite.draw(
+            canvas,
+            (int) gameDisplay.gameToDisplayCoordinatesX(spell.getPositionX()) - sprite.getWidth() / 2,
+            (int) gameDisplay.gameToDisplayCoordinatesY(spell.getPositionY()) - sprite.getHeight() / 2
+        );
     }
 }
