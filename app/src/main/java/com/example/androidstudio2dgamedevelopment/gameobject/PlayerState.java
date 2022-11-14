@@ -5,7 +5,8 @@ public class PlayerState {
     public enum State {
         NOT_MOVING,
         STARED_MOVING,
-        IS_MOVING
+        IS_MOVING,
+        BACK_MOVING
     }
 
     private Player player;
@@ -29,10 +30,13 @@ public class PlayerState {
             case STARED_MOVING:
                 if (player.velocityX != 0 || player.velocityY != 0)
                     state = State.IS_MOVING;
+
                 break;
             case IS_MOVING:
                 if (player.velocityX == 0 && player.velocityY == 0)
                     state = State.NOT_MOVING;
+                    System.out.println(player.velocityX);
+                    System.out.println(player.velocityY);
                 break;
             default:
                 break;
