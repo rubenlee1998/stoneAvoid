@@ -8,8 +8,8 @@ public class Joystick {
 
     private int outerCircleCenterPositionX;
     private int outerCircleCenterPositionY;
-    private int innerCircleCenterPositionX;
-    private int innerCircleCenterPositionY;
+    public int innerCircleCenterPositionX;
+    public int innerCircleCenterPositionY;
 
     private int outerCircleRadius;
     private int innerCircleRadius;
