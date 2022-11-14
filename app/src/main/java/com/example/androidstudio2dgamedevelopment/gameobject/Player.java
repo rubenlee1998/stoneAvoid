@@ -25,7 +25,7 @@ public class Player extends Circle {
     private HealthBar healthBar;
     private int healthPoints = MAX_HEALTH_POINTS;
     private Animator animator;
-    private PlayerState playerState;
+    public PlayerState playerState;
 
     public Player(Context context, Joystick joystick, double positionX, double positionY, double radius, Animator animator) {
         super(context, ContextCompat.getColor(context, R.color.player), positionX, positionY, radius);
@@ -57,7 +57,7 @@ public class Player extends Circle {
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        animator.draw(canvas, gameDisplay, this);
+        animator.draw(canvas, gameDisplay, this,null);
 
         healthBar.draw(canvas, gameDisplay);
 

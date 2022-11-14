@@ -30,6 +30,22 @@ public class SpriteSheet {
         spriteArray[7] = new Sprite(this, new Rect(3*64, 128, 4*64, 192)); // 남서쪽
         return spriteArray;
     }
+    public Sprite[] getEnemySpriteArray() {
+        Sprite[] spriteArray = new Sprite[8];
+        spriteArray[0] = new Sprite(this, new Rect(0*64, 256, 1*64, 320));
+        spriteArray[1] = new Sprite(this, new Rect(0*64, 256, 1*64, 320));
+        spriteArray[2] = new Sprite(this, new Rect(0*64, 256, 1*64, 320));
+        spriteArray[3] = new Sprite(this, new Rect(0*64, 256, 1*64, 320));
+
+        spriteArray[4] = new Sprite(this, new Rect(1*64, 256, 2*64, 320));
+        spriteArray[5] = new Sprite(this, new Rect(1*64, 256, 2*64, 320));
+        spriteArray[6] = new Sprite(this, new Rect(1*64, 256, 2*64, 320));
+        spriteArray[7] = new Sprite(this, new Rect(1*64, 256, 2*64, 320));
+
+
+
+        return spriteArray;
+    }
 
     public Bitmap getBitmap() {
         return bitmap;

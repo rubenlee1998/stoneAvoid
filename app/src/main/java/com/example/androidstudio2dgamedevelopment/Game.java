@@ -145,6 +145,8 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         for (Enemy enemy : enemyList) {
             enemy.draw(canvas, gameDisplay);
+
+
         }
 
         for (Spell spell : spellList) {
@@ -173,7 +175,9 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Spawn enemy
         if(Enemy.readyToSpawn()) {
-            enemyList.add(new Enemy(getContext(), player));
+            SpriteSheet spriteSheet = new SpriteSheet(getContext());
+            Animator animator = new Animator(spriteSheet.getEnemySpriteArray());
+            enemyList.add(new Enemy(getContext(), player,animator));
         }
 
         // Update states of all enemies

@@ -17,11 +17,12 @@ public class PlayerState {
         LEFT_MOVING,
         DOWN_LEFT_MOVING,
         UP_LEFT_MOVING,
+        ENEMY
 
     }
 
     private Player player;
-    private State state;
+    public State state;
 
     public PlayerState(Player player) {
         this.player = player;
