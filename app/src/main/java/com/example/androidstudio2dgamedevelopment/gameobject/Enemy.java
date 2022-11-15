@@ -23,11 +23,6 @@ public class Enemy extends Circle {
     private static double updatesUntilNextSpawn = UPDATES_PER_SPAWN;
     public Player player;
     public Animator animator;
-    public Enemy(Context context, Player player, double positionX, double positionY, double radius) {
-        super(context, ContextCompat.getColor(context, R.color.enemy), positionX, positionY, radius);
-        this.player = player;
-        this.player.playerState.state = PlayerState.State.ENEMY;
-    }
 
     /**
      * Enemy is an overload constructor used for spawning enemies in random locations

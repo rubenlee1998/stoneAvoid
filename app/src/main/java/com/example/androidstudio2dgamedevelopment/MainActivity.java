@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 /**
  * MainActivity is the entry point to our application.
@@ -13,6 +14,9 @@ public class MainActivity extends Activity {
 
     private Game game;
     private MediaPlayer mPlayer; // 배경음악
+    private boolean isStart = true;
+    private int cnt =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("MainActivity.java", "onCreate()");
@@ -22,9 +26,17 @@ public class MainActivity extends Activity {
         mPlayer.setLooping(true);
         mPlayer.start();
 
-        // Set content view to game, so that objects in the Game class can be rendered to the screen
+//        // Set content view to game, so that objects in the Game class can be rendered to the screen
+
         game = new Game(this);
+
+
+
         setContentView(game);
+
+    }
+    public void onClick(View target){
+        isStart = false;
     }
 
     @Override

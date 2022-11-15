@@ -1,8 +1,14 @@
 package com.example.androidstudio2dgamedevelopment.graphics;
 
+import android.content.Context;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 
 import com.example.androidstudio2dgamedevelopment.GameDisplay;
+import com.example.androidstudio2dgamedevelopment.R;
 import com.example.androidstudio2dgamedevelopment.gameobject.Enemy;
 import com.example.androidstudio2dgamedevelopment.gameobject.Player;
 import com.example.androidstudio2dgamedevelopment.gameobject.PlayerState;
@@ -15,9 +21,15 @@ public class Animator {
     public int gimoring2 = 0;
     public int cnt = 0;
     public PlayerState.State pre;
+    private Context context;
+
+
     public Animator(Sprite[] playerSpriteArray) {
+
         this.playerSpriteArray = playerSpriteArray;
+
     }
+
 
 
     public void draw(Canvas canvas, GameDisplay gameDisplay, Player player, Enemy enemy,Spell spell) {
@@ -48,6 +60,8 @@ public class Animator {
             else if(gimoring2 == 8){
                 gimoring2 =0;
             }
+
+
             drawSpellFrame(canvas, gameDisplay,playerSpriteArray[gimoring2],spell);
         }
         else if (enemy != null) {

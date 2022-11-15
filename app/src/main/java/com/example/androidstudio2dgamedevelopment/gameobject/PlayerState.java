@@ -1,14 +1,9 @@
 package com.example.androidstudio2dgamedevelopment.gameobject;
 
-import com.example.androidstudio2dgamedevelopment.gamepanel.Joystick;
-
 public class PlayerState {
 
 
     public enum State {
-        NOT_MOVING,
-        STARED_MOVING,
-        IS_MOVING,
         UP_MOVING,
         UP_RIGHT_MOVING,
         DOWN_MOVING,
@@ -34,10 +29,6 @@ public class PlayerState {
     }
 
     public void update() {
-//        switch (state) {
-//            case NOT_MOVING:
-//                if (player.velocityX != 0 || player.velocityY != 0)
-//                    state = State.IS_MOVING;
                 if(player.joystick.getActuatorY() == 0 && player.joystick.getActuatorX() == 0){
 
                 }
@@ -65,18 +56,5 @@ public class PlayerState {
                 else if(player.joystick.getActuatorX()*0.45 + player.joystick.getActuatorY() >= 0 && player.joystick.getActuatorY() + player.joystick.getActuatorX()*2.25 <= 0) {
                     state = State.DOWN_LEFT_MOVING;
                 }
-//                break;
-//            case STARED_MOVING:
-//                if (player.velocityX != 0 || player.velocityY != 0)
-//                    state = State.IS_MOVING;
-//                break;
-//            case IS_MOVING:
-
-//                break;
-//            default:
-//                break;
-//        }
-//        if (player.velocityX == 0 && player.velocityY == 0)
-//            state = State.NOT_MOVING;
     }
 }

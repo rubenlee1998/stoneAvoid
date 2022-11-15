@@ -3,6 +3,8 @@ package com.example.androidstudio2dgamedevelopment;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.media.AudioAttributes;
+import android.media.SoundPool;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -32,6 +34,8 @@ import java.util.List;
 class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     private final Tilemap tilemap;
+    private final int removeGal;
+    private final int hitSound;
     private int joystickPointerId = 0;
     private final Joystick joystick;
     private final Player player;
@@ -42,6 +46,8 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameOver gameOver;
     private Performance performance;
     private GameDisplay gameDisplay;
+    public int bubbleShot;
+    public SoundPool mSound;
 
     public Game(Context context) {
         super(context);
@@ -60,7 +66,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Initialize game objects
         SpriteSheet spriteSheet = new SpriteSheet(context);
         Animator animator = new Animator(spriteSheet.getPlayerSpriteArray());
-        player = new Player(context, joystick, 2*500, 500, 32, animator);
+        player = new Player(context, joystick, 2*800, 2000, 32, animator);
 
         // Initialize display and center it around the player
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -70,6 +76,11 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Initialize Tilemap
         tilemap = new Tilemap(spriteSheet);
 
+        AudioAttributes attributes = new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED).setUsage(AudioAttributes.USAGE_GAME).build();
+        mSound = new SoundPool.Builder().setAudioAttributes(attributes).setMaxStreams(5).build();
+        bubbleShot = mSound.load(context, R.raw.bubblepop,1);
+        removeGal = mSound.load(context, R.raw.removegal,1);
+        hitSound = mSound.load(context, R.raw.hitsound,1);
         setFocusable(true);
     }
 
@@ -191,6 +202,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
             Animator animator = new Animator(spriteSheet.getSpellSpriteArray());
             spellList.add(new Spell(getContext(), player,animator));
             numberOfSpellsToCast --;
+            mSound.play(bubbleShot,0.1f,0.1f,1,0,1);
         }
         for (Spell spell : spellList) {
             spell.update();
@@ -203,6 +215,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
             Circle enemy = iteratorEnemy.next();
             if (Circle.isColliding(enemy, player)) {
                 // Remove enemy if it collides with the player
+                mSound.play(hitSound,0.1f,0.1f,1,0,1);
                 iteratorEnemy.remove();
                 player.setHealthPoint(player.getHealthPoint() - 1);
                 continue;
@@ -213,8 +226,10 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
                 Circle spell = iteratorSpell.next();
                 // Remove enemy if it collides with a spell
                 if (Circle.isColliding(spell, enemy)) {
+                    mSound.play(removeGal,0.1f,0.1f,1,0,1);
                     iteratorSpell.remove();
                     iteratorEnemy.remove();
+
                     break;
                 }
             }

@@ -1,5 +1,9 @@
 package com.example.androidstudio2dgamedevelopment;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -114,4 +118,5 @@ public class GameLoop extends Thread{
             e.printStackTrace();
         }
     }
+
 }
