@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         Log.d("MainActivity.java", "onCreate()");
         super.onCreate(savedInstanceState);
 
-        mPlayer = MediaPlayer.create(this,R.raw.findmoris);
+        mPlayer = MediaPlayer.create(this,R.raw.avoidstonebgm);
         mPlayer.setLooping(true);
         mPlayer.start();
         setContentView(R.layout.activity_main);

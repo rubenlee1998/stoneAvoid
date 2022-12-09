@@ -13,7 +13,6 @@ public class PlayerState {
         DOWN_LEFT_MOVING,
         UP_LEFT_MOVING,
         ENEMY
-
     }
 
     private Player player;
