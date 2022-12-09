@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * MainActivity is the entry point to our application.
@@ -25,14 +26,17 @@ public class MainActivity extends Activity {
         mPlayer = MediaPlayer.create(this,R.raw.findmoris);
         mPlayer.setLooping(true);
         mPlayer.start();
-
+        setContentView(R.layout.activity_main);
 //        // Set content view to game, so that objects in the Game class can be rendered to the screen
-
         game = new Game(this);
-
-
-
-        setContentView(game);
+        Button button1 = (Button) findViewById(R.id.button1) ;
+        button1.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setContentView(game);
+                isStart = false;
+            }
+        });
 
     }
     public void onClick(View target){
@@ -72,7 +76,6 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        // Comment out "super.onBackPressed()" to disable button
-        //super.onBackPressed();
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 }

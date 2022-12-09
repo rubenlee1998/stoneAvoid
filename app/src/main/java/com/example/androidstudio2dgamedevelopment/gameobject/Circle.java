@@ -19,7 +19,6 @@ public abstract class Circle extends GameObject {
         super(positionX, positionY);
         this.radius = radius;
 
-        // Set colors of circle
         paint = new Paint();
         paint.setColor(color);
     }

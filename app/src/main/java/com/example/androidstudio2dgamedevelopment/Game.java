@@ -16,9 +16,9 @@ import com.example.androidstudio2dgamedevelopment.gameobject.Circle;
 import com.example.androidstudio2dgamedevelopment.gameobject.Enemy;
 import com.example.androidstudio2dgamedevelopment.gameobject.Player;
 import com.example.androidstudio2dgamedevelopment.gameobject.Spell;
+import com.example.androidstudio2dgamedevelopment.gamepanel.GameClear;
 import com.example.androidstudio2dgamedevelopment.gamepanel.GameOver;
 import com.example.androidstudio2dgamedevelopment.gamepanel.Joystick;
-import com.example.androidstudio2dgamedevelopment.gamepanel.Performance;
 import com.example.androidstudio2dgamedevelopment.graphics.Animator;
 import com.example.androidstudio2dgamedevelopment.graphics.SpriteSheet;
 import com.example.androidstudio2dgamedevelopment.map.Tilemap;
@@ -42,9 +42,10 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private List<Enemy> enemyList = new ArrayList<Enemy>();
     private List<Spell> spellList = new ArrayList<Spell>();
-    private int numberOfSpellsToCast = 0;
+    private int numberOfShellsToShot = 0;
     private GameOver gameOver;
-    private Performance performance;
+    private GameClear gameClear;
+
     private GameDisplay gameDisplay;
     public int bubbleShot;
     public SoundPool mSound;
@@ -52,28 +53,24 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     public Game(Context context) {
         super(context);
 
-        // Get surface holder and add callback
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
 
         gameLoop = new GameLoop(this, surfaceHolder);
 
-        // Initialize game panels
-        performance = new Performance(context, gameLoop);
+
         gameOver = new GameOver(context);
+        gameClear = new GameClear(context);
         joystick = new Joystick(275, 700, 150, 70);
 
-        // Initialize game objects
         SpriteSheet spriteSheet = new SpriteSheet(context);
         Animator animator = new Animator(spriteSheet.getPlayerSpriteArray());
-        player = new Player(context, joystick, 2*800, 2000, 32, animator);
+        player = new Player(context, joystick, 4*800, 5200, 32, animator);
 
-        // Initialize display and center it around the player
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay = new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
 
-        // Initialize Tilemap
         tilemap = new Tilemap(spriteSheet);
 
         AudioAttributes attributes = new AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_MUSIC).setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED).setUsage(AudioAttributes.USAGE_GAME).build();
@@ -93,14 +90,14 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_POINTER_DOWN:
                 if (joystick.getIsPressed()) {
                     // Joystick was pressed before this event -> cast spell
-                    numberOfSpellsToCast ++;
+                    numberOfShellsToShot ++;
                 } else if (joystick.isPressed((double) event.getX(), (double) event.getY())) {
                     // Joystick is pressed in this event -> setIsPressed(true) and store pointer id
                     joystickPointerId = event.getPointerId(event.getActionIndex());
                     joystick.setIsPressed(true);
                 } else {
                     // Joystick was not previously, and is not pressed in this event -> cast spell
-                    numberOfSpellsToCast ++;
+                    numberOfShellsToShot ++;
                 }
                 return true;
             case MotionEvent.ACTION_MOVE:
@@ -166,55 +163,52 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Draw game panels
         joystick.draw(canvas);
-        performance.draw(canvas);
 
         // Draw Game over if the player is dead
         if (player.getHealthPoint() <= 0) {
             gameOver.draw(canvas);
         }
+        if(player.getPositionY() <=1140 && player.getPositionY() >= 500 && player.getPositionX() <= 6000 && player.getPositionX() >= 4600){
+            gameClear.draw(canvas);
+        }
     }
 
     public void update() {
-        // Stop updating the game if the player is dead
         if (player.getHealthPoint() <= 0) {
             return;
         }
+        if(player.getPositionY() <=1140 && player.getPositionY() >= 500 && player.getPositionX() <= 6000 && player.getPositionX() >= 4600){
+            return;
+        }
 
-        // Update game state
         joystick.update();
         player.update();
 
-        // Spawn enemy
         if(Enemy.readyToSpawn()) {
             SpriteSheet spriteSheet = new SpriteSheet(getContext());
             Animator animator = new Animator(spriteSheet.getEnemySpriteArray());
             enemyList.add(new Enemy(getContext(), player,animator));
         }
 
-        // Update states of all enemies
         for (Enemy enemy : enemyList) {
             enemy.update();
         }
 
-        // Update states of all spells
-        while (numberOfSpellsToCast > 0) {
+        while (numberOfShellsToShot > 0) {
             SpriteSheet spriteSheet = new SpriteSheet(getContext());
-            Animator animator = new Animator(spriteSheet.getSpellSpriteArray());
+            Animator animator = new Animator(spriteSheet.getShellSpriteArray());
             spellList.add(new Spell(getContext(), player,animator));
-            numberOfSpellsToCast --;
+            numberOfShellsToShot --;
             mSound.play(bubbleShot,0.1f,0.1f,1,0,1);
         }
         for (Spell spell : spellList) {
             spell.update();
         }
 
-        // Iterate through enemyList and Check for collision between each enemy and the player and
-        // spells in spellList.
         Iterator<Enemy> iteratorEnemy = enemyList.iterator();
         while (iteratorEnemy.hasNext()) {
             Circle enemy = iteratorEnemy.next();
             if (Circle.isColliding(enemy, player)) {
-                // Remove enemy if it collides with the player
                 mSound.play(hitSound,0.1f,0.1f,1,0,1);
                 iteratorEnemy.remove();
                 player.setHealthPoint(player.getHealthPoint() - 1);
@@ -224,7 +218,6 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
             Iterator<Spell> iteratorSpell = spellList.iterator();
             while (iteratorSpell.hasNext()) {
                 Circle spell = iteratorSpell.next();
-                // Remove enemy if it collides with a spell
                 if (Circle.isColliding(spell, enemy)) {
                     mSound.play(removeGal,0.1f,0.1f,1,0,1);
                     iteratorSpell.remove();
@@ -235,7 +228,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
         
-        // Update gameDisplay so that it's center is set to the new center of the player's 
+        // Update gameDisplay so that it's center is set to the new center of the player's
         // game coordinates
         gameDisplay.update();
     }

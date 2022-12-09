@@ -23,17 +23,14 @@ public class Joystick {
 
     public Joystick(int centerPositionX, int centerPositionY, int outerCircleRadius, int innerCircleRadius) {
         
-        // Outer and inner circle make up the joystick
         outerCircleCenterPositionX = centerPositionX;
         outerCircleCenterPositionY = centerPositionY;
         innerCircleCenterPositionX = centerPositionX;
         innerCircleCenterPositionY = centerPositionY;
         
-        // Radii of circles
         this.outerCircleRadius = outerCircleRadius;
         this.innerCircleRadius = innerCircleRadius;
 
-        // paint of circles
         outerCirclePaint = new Paint();
         outerCirclePaint.setColor(Color.GRAY);
         outerCirclePaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -44,7 +41,6 @@ public class Joystick {
     }
 
     public void draw(Canvas canvas) {
-        // Draw outer circle
         canvas.drawCircle(
                 outerCircleCenterPositionX,
                 outerCircleCenterPositionY,
@@ -52,7 +48,6 @@ public class Joystick {
                 outerCirclePaint
         );
 
-        // Draw inner circle
         canvas.drawCircle(
                 innerCircleCenterPositionX,
                 innerCircleCenterPositionY,

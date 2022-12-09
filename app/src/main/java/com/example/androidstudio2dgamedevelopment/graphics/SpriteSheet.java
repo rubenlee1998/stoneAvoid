@@ -45,7 +45,7 @@ public class SpriteSheet {
 
         return spriteArray;
     }
-    public Sprite[] getSpellSpriteArray() {
+    public Sprite[] getShellSpriteArray() {
         Sprite[] spriteArray = new Sprite[9];
         spriteArray[0] = new Sprite(this, new Rect(0*64, 192, 1*64, 256));
         spriteArray[1] = new Sprite(this, new Rect(0*64, 192, 1*64, 256));
