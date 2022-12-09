@@ -26,7 +26,7 @@
         android:layout_marginBottom="60dp"
         android:backgroundTint="#03A3A1A1"
         android:text="Start"
-        android:textColor="20"
+        android:textColor="#FA0000"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
