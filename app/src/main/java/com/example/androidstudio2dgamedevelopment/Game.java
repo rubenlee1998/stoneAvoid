@@ -222,7 +222,6 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
                     mSound.play(removeGal,0.1f,0.1f,1,0,1);
                     iteratorSpell.remove();
                     iteratorEnemy.remove();
-
                     break;
                 }
             }
