@@ -92,49 +92,19 @@ public class Animator {
 
         } else if(player != null){
 
-            if (player.getPlayerState().getState() == PlayerState.State.UP_MOVING) {
-                pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[0],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.DOWN_MOVING) {
-                pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[2],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.RIGHT_MOVING) {
-                pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[1],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.LEFT_MOVING) {
-                pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[3],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.UP_RIGHT_MOVING) {
-                pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[5],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.DOWN_RIGHT_MOVING) {
+            if (player.getPlayerState().getState() == PlayerState.State.RIGHT_MOVING) {
                 pre = player.getPlayerState().getState();
                 drawFrame(canvas, gameDisplay, player, playerSpriteArray[6],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.DOWN_LEFT_MOVING) {
+            } else if (player.getPlayerState().getState() == PlayerState.State.LEFT_MOVING) {
                 pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[7],null);
-            } else if (player.getPlayerState().getState() == PlayerState.State.UP_LEFT_MOVING) {
-                pre = player.getPlayerState().getState();
-                drawFrame(canvas, gameDisplay, player, playerSpriteArray[4],null);
+                drawFrame(canvas, gameDisplay, player, playerSpriteArray[1],null);
             }
-            else{
-                if (pre == PlayerState.State.UP_MOVING) {
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[0],null);
-                } else if (pre == PlayerState.State.DOWN_MOVING) {
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[2],null);
-                } else if (pre == PlayerState.State.RIGHT_MOVING) {
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[1],null);
-                } else if (pre == PlayerState.State.LEFT_MOVING) {
 
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[3],null);
-                } else if (pre == PlayerState.State.UP_RIGHT_MOVING) {
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[5],null);
-                } else if (pre == PlayerState.State.DOWN_RIGHT_MOVING) {
+            else{
+                if (pre == PlayerState.State.RIGHT_MOVING) {
                     drawFrame(canvas, gameDisplay, player, playerSpriteArray[6],null);
-                } else if (pre == PlayerState.State.DOWN_LEFT_MOVING) {
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[7],null);
-                } else if (pre == PlayerState.State.UP_LEFT_MOVING) {
-                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[4],null);
+                } else if (pre == PlayerState.State.LEFT_MOVING) {
+                    drawFrame(canvas, gameDisplay, player, playerSpriteArray[1],null);
                 }
             }
         }

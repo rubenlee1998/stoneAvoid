@@ -8,8 +8,8 @@ import android.graphics.Rect;
 import com.example.androidstudio2dgamedevelopment.R;
 
 public class SpriteSheet {
-    private static final int SPRITE_WIDTH_PIXELS = 64;
-    private static final int SPRITE_HEIGHT_PIXELS = 64;
+    private static final int SPRITE_WIDTH_PIXELS = 128;
+    private static final int SPRITE_HEIGHT_PIXELS = 128;
     private Bitmap bitmap;
 
     public SpriteSheet(Context context) {
@@ -19,17 +19,16 @@ public class SpriteSheet {
     }
 
     public Sprite[] getPlayerSpriteArray() {
-        Sprite[] spriteArray = new Sprite[2];
-        //spriteArray[0] = new Sprite(this, new Rect(0*64, 0, 1*64, 64));
-        //spriteArray[1] = new Sprite(this, new Rect(1*64, 0, 2*64, 64));
-//        spriteArray[2] = new Sprite(this, new Rect(2*64, 0, 3*64, 64));
-//        spriteArray[3] = new Sprite(this, new Rect(3*64, 0, 4*64, 64));
-//        spriteArray[4] = new Sprite(this, new Rect(0*64, 128, 1*64, 192)); // 북서쪽
-//        spriteArray[5] = new Sprite(this, new Rect(1*64, 128, 2*64, 192)); // 북동쪽
-//        spriteArray[6] = new Sprite(this, new Rect(2*64, 128, 3*64, 192)); // 남동쪽
-//        spriteArray[7] = new Sprite(this, new Rect(3*64, 128, 4*64, 192)); // 남서쪽
+        Sprite[] spriteArray = new Sprite[8];
         spriteArray[0] = new Sprite(this, new Rect(0*128, 0, 1*128, 128)); // left
-        spriteArray[1] = new Sprite(this, new Rect(1*128, 0, 2*128, 128)); // right
+        spriteArray[1] = new Sprite(this, new Rect(0*128, 0, 1*128, 128)); // right
+        spriteArray[2] = new Sprite(this, new Rect(0*128, 0, 1*128, 128)); // right
+        spriteArray[3] = new Sprite(this, new Rect(0*128, 0, 1*128, 128)); // right
+        spriteArray[4] = new Sprite(this, new Rect(1*128, 0, 2*128, 128)); // right
+        spriteArray[5] = new Sprite(this, new Rect(1*128, 0, 2*128, 128)); // right
+        spriteArray[6] = new Sprite(this, new Rect(1*128, 0, 2*128, 128)); // right
+        spriteArray[7] = new Sprite(this, new Rect(1*128, 0, 2*128, 128)); // right
+
         return spriteArray;
     }
     public Sprite[] getEnemySpriteArray() {
@@ -45,18 +44,17 @@ public class SpriteSheet {
 
         return spriteArray;
     }
-    public Sprite[] getShellSpriteArray() {
+    public Sprite[] getSpellSpriteArray() {
         Sprite[] spriteArray = new Sprite[9];
-        spriteArray[0] = new Sprite(this, new Rect(0*64, 192, 1*64, 256));
-        spriteArray[1] = new Sprite(this, new Rect(0*64, 192, 1*64, 256));
-        spriteArray[2] = new Sprite(this, new Rect(0*64, 192, 1*64, 256));
-        spriteArray[3] = new Sprite(this, new Rect(1*64, 192, 2*64, 256));
-        spriteArray[4] = new Sprite(this, new Rect(1*64, 192, 2*64, 256));
-        spriteArray[5] = new Sprite(this, new Rect(1*64, 192, 2*64, 256));
-        spriteArray[6] = new Sprite(this, new Rect(2*64, 192, 3*64, 256));
-        spriteArray[7] = new Sprite(this, new Rect(2*64, 192, 3*64, 256));
-        spriteArray[8] = new Sprite(this, new Rect(2*64, 192, 3*64, 256));
-
+        spriteArray[0] = new Sprite(this, new Rect(2*64, 256, 3*64, 320));
+        spriteArray[1] = new Sprite(this, new Rect(2*64, 256, 3*64, 320));
+        spriteArray[2] = new Sprite(this, new Rect(2*64, 256, 3*64, 320));
+        spriteArray[3] = new Sprite(this, new Rect(2*64, 256, 3*64, 320));
+        spriteArray[4] = new Sprite(this, new Rect(3*64, 256, 4*64, 320));
+        spriteArray[5] = new Sprite(this, new Rect(3*64, 256, 4*64, 320));
+        spriteArray[6] = new Sprite(this, new Rect(3*64, 256, 4*64, 320));
+        spriteArray[7] = new Sprite(this, new Rect(3*64, 256, 4*64, 320));
+        spriteArray[8] = new Sprite(this, new Rect(3*64, 256, 4*64, 320));
         return spriteArray;
     }
 
@@ -71,19 +69,6 @@ public class SpriteSheet {
     public Sprite getLavaSprite() {
         return getSpriteByIndex(1, 1);
     }
-
-    public Sprite getGroundSprite() {
-        return getSpriteByIndex(1, 2);
-    }
-
-    public Sprite getGrassSprite() {
-        return getSpriteByIndex(1, 3);
-    }
-
-    public Sprite getTreeSprite() {
-        return getSpriteByIndex(1, 4);
-    }
-
 
     private Sprite getSpriteByIndex(int idxRow, int idxCol) {
         return new Sprite(this, new Rect(

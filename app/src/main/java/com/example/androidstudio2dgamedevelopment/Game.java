@@ -196,7 +196,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         while (numberOfShellsToShot > 0) {
             SpriteSheet spriteSheet = new SpriteSheet(getContext());
-            Animator animator = new Animator(spriteSheet.getShellSpriteArray());
+            Animator animator = new Animator(spriteSheet.getSpellSpriteArray());
             spellList.add(new Spell(getContext(), player,animator));
             numberOfShellsToShot --;
             mSound.play(bubbleShot,0.1f,0.1f,1,0,1);
